@@ -16,7 +16,7 @@ class SqlPerformanceGuardServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/', 'sql-performance-guard');
+        $this->mergeConfigFrom(__DIR__.'/../config/sql-performance-guard.php', 'sql-performance-guard');
     }
 
     /**
@@ -68,7 +68,7 @@ class SqlPerformanceGuardServiceProvider extends ServiceProvider
                     Log::debug($row['possible_keys'] !== null ? 'PASSED: POSSIBLE KEYS' : 'WARNING: POSSIBLE KEYS', [$row['possible_keys'] !== null ? 'possible keys exist' : 'possible keys are null' => $row['possible_keys']]);
                     Log::debug($row['key'] !== null ? 'PASSED: KEY' : 'WARNING: KEY', [$row['key'] !== null ? 'key chosen' : 'key is null' => $row['key']]);
                     Log::debug($row['key_len'] !== null ? 'PASSED: KEY LEN' : 'WARNING: KEY LEN', [$row['key_len'] !== null ? 'key len is not null' : 'key len is null' => $row['key_len']]);
-                    Log::debug($row['key_len'] < config('sql-performance-guard.key_length_threshold') ? 'PASSED: KEY LEN VALUE' : 'WARNING: KEY LEN VALUE', [$row['key_len'] < config('sql-performance-guard.key_length_threshold') ? 'key len < 256' : 'key len >= 256' => $row['key_len']]);
+                    Log::debug($row['key_len'] !== null && $row['key_len'] < config('sql-performance-guard.key_length_threshold') ? 'PASSED: KEY LEN VALUE' : 'WARNING: KEY LEN VALUE', [$row['key_len'] !== null && $row['key_len'] < config('sql-performance-guard.key_length_threshold') ? 'key len < 256' : 'key len >= 256' => $row['key_len']]);
                     Log::debug($row['rows'] < config('sql-performance-guard.rows_threshold') ? 'PASSED: ROWS' : 'WARNING: ROWS', [$row['rows'] < config('sql-performance-guard.rows_threshold') ? 'rows < 1000' : 'rows >= 1000' => $row['rows']]);
 
                     Log::debug('=============== EXPLAIN = END ===============');
