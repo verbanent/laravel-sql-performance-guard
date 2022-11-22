@@ -41,7 +41,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Verbanent\\SqlPerformanceGuard\\MediaLibraryServiceProvider"
+                "Verbanent\\SqlPerformanceGuard\\SqlPerformanceGuardServiceProvider"
             ]
         }
     },
