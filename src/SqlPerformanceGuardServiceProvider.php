@@ -53,7 +53,7 @@ class SqlPerformanceGuardServiceProvider extends ServiceProvider
                     ],
                 );
 
-                if (Str::startsWith($query->sql, 'select')) {
+                if (Str::startsWith($query->sql, ['select', 'update', 'delete'])) {
                     Log::debug('');
                     Log::debug('=============== EXPLAIN BEGIN ===============');
                     Log::debug('SQL', ['sql' => $sqlWithBindings]);
@@ -61,7 +61,7 @@ class SqlPerformanceGuardServiceProvider extends ServiceProvider
 
                     foreach ($explain as $row) {
                         Log::debug('');
-                        Log::debug('TABLE ' . $row['key'] . ': ' . $row['table'], $row);
+                        Log::debug('TABLE ' . $row['id'] . ': ' . $row['table'], $row);
                         Log::debug($query->time < config('sql-performance-guard.time_threshold') ? 'PASSED: TIME' : 'WARNING: TIME', [$query->time < config('sql-performance-guard.time_threshold') ? 'time < 100.00' : 'time >= 100.00' => $query->time]);
                         Log::debug($row['possible_keys'] !== null ? 'PASSED: POSSIBLE KEYS' : 'WARNING: POSSIBLE KEYS', [$row['possible_keys'] !== null ? 'possible keys exist' : 'possible keys are null' => $row['possible_keys']]);
                         Log::debug($row['key'] !== null ? 'PASSED: KEY' : 'WARNING: KEY', [$row['key'] !== null ? 'key chosen' : 'key is null' => $row['key']]);
