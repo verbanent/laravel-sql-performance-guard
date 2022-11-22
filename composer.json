@@ -1,0 +1,54 @@
+{
+    "name": "verbanent/laravel-sql-performance-guard",
+    "description": "Check SQL performance",
+    "keywords": [
+        "verbanent",
+        "laravel",
+        "sql",
+        "performance",
+        "optimise",
+        "queries",
+        "mysql",
+        "statements",
+        "explain"
+    ],
+    "homepage": "https://github.com/verbanent/laravel-sql-performance-guard",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Radek Ziemniewicz",
+            "email": "radek@verbanent.com",
+            "homepage": "https://verbanent.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "laravel/framework": "^9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Verbanent\\SqlPerformanceGuard\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Verbanent\\SqlPerformanceGuard\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Verbanent\\SqlPerformanceGuard\\MediaLibraryServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "type": "library",
+    "prefer-stable": true
+}
