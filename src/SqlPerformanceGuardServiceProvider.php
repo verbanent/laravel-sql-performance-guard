@@ -42,6 +42,14 @@ class SqlPerformanceGuardServiceProvider extends ServiceProvider
                     if ($param === null) {
                         $bindings[$key] = 'null';
                     }
+
+                    if ($param === true) {
+                        $bindings[$key] = 'true';
+                    }
+
+                    if ($param === false) {
+                        $bindings[$key] = 'false';
+                    }
                 }
 
                 $sqlWithBindings = Str::replaceArray('?', $bindings, $query->sql);
