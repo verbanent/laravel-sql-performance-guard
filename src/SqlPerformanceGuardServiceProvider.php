@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class SqlPerformanceGuardServiceProvider extends ServiceProvider
 {
@@ -37,18 +38,32 @@ class SqlPerformanceGuardServiceProvider extends ServiceProvider
                 foreach ($bindings as $key => $param) {
                     if (is_string($param)) {
                         $bindings[$key] = "'{$param}'";
+
+                        continue;
                     }
 
                     if ($param === null) {
                         $bindings[$key] = 'null';
+
+                        continue;
                     }
 
                     if ($param === true) {
                         $bindings[$key] = 'true';
+
+                        continue;
                     }
 
                     if ($param === false) {
                         $bindings[$key] = 'false';
+
+                        continue;
+                    }
+
+                    if (new Carbon($param) instanceof Carbon) {
+                        $bindings[$key] = "'{$param}'";
+
+                        continue;
                     }
                 }
 
