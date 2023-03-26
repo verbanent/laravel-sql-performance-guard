@@ -27,6 +27,10 @@ class SqlPerformanceGuardServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (env('LOG_LEVEL', 'info') !== 'debug') {
+            return;
+        }
+
         $this->publishes([
             __DIR__.'/../config/sql-performance-guard.php' => config_path('sql-performance-guard.php'),
         ], 'config');
